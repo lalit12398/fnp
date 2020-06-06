@@ -21,6 +21,7 @@ export const ProductListStyles = makeStyles(() => {
     },
     productLink: {
       textDecoration: "none",
+      color: "#000"
     },
     productInfo: {
       textAlign: "center",

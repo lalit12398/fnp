@@ -9,6 +9,7 @@ import RupeeIcon from "../../assets/images/rupee.svg";
 import Rating from "@material-ui/lab/Rating";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import { Link } from "react-router-dom";
 
 export default function ProductCard(props) {
   const { product, toggleFavouriteHandler, id, isFavourite } = props;
@@ -19,7 +20,7 @@ export default function ProductCard(props) {
   };
   return (
     <Card className={classes.productCard}>
-      <div onClick={() => handleClickRedirection(product.landingPage)}>
+      <Link to="/" onClick={() => handleClickRedirection(product.landingPage)} className={classes.productLink}>
         <CardActionArea>
           <CardMedia
             className={classes.dproductMedia}
@@ -65,7 +66,7 @@ export default function ProductCard(props) {
             </div>
           </CardContent>
         </CardActionArea>
-      </div>
+      </Link>
       {product.bestSeller && <p className={classes.bestSeller}>Best Seller</p>}
 
       {isFavourite ? (
