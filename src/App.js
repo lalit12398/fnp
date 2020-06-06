@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import ProductList from "./pages/ProductList/ProductList";
+import clsx from "clsx";
+import { LayoutStyles } from "./components/layout.style";
+import { BrowserRouter, Route } from "react-router-dom";
 
 function App() {
+  const [open, setOpen] = React.useState(false);
+  const classes = LayoutStyles();
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className={classes.root}>
+      <Header open={open} handleDrawerOpen={handleDrawerOpen} />{" "}
+      <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
+      <BrowserRouter>
+        <main
+          className={clsx(classes.content, {
+            [classes.contentShift]: open,
+          })}
         >
-          Learn React
-        </a>
-      </header>
+          <div className={classes.drawerHeader} />
+          <Route path={"/"} component={ProductList} />
+        </main>
+      </BrowserRouter>
     </div>
   );
 }
